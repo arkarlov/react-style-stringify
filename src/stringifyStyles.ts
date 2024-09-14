@@ -3,11 +3,11 @@ import { stringifyCSSProperties } from "./stringifyCSSProperties";
 
 export function stringifyStyles(
   styleObject: StyleObject,
-  important: boolean = false
+  isImportant: boolean = false
 ) {
   return Object.entries(styleObject)
     .map(
-      ([key, value]) => `${key}{${stringifyCSSProperties(value, important)}}`
+      ([key, value]) => `${key}{${stringifyCSSProperties(value, isImportant)}}`
     )
     .join(" ");
 }
