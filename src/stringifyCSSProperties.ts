@@ -1,6 +1,5 @@
 import { type CSSProperties } from "react";
-import { camelToKebab } from "./formatters";
-import { applyCssUnits } from "./utils";
+import { applyCssUnits, camelToKebab } from "./utils";
 
 export function stringifyCSSProperties(
   cssProperties: CSSProperties,
