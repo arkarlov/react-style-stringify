@@ -1,10 +1,18 @@
 {
   "name": "react-style-stringify",
   "version": "0.0.1",
-  "description": "",
-  "keywords": [],
+  "description": "A utility for converting React CSSProperties and style maps into CSS strings, designed to simplify the management of inline styles in HTML email templates and React projects.",
+  "keywords": [
+    "css",
+    "css-strings",
+    "css-properties",
+    "stringify",
+    "styles",
+    "react-styles",
+    "style-map"
+  ],
   "license": "MIT",
-  "author": "",
+  "author": "Artem Karlov",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
