@@ -1,4 +1,4 @@
 export * from "./stringifyCSSProperties";
-export * from "./stringifyStyles";
+export * from "./stringifyStyleMap";
 
 export * from "./types";

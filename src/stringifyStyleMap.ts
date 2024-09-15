@@ -1,11 +1,11 @@
-import { type StyleObject } from "./types";
+import { type StyleMap } from "./types";
 import { stringifyCSSProperties } from "./stringifyCSSProperties";
 
-export function stringifyStyles(
-  styleObject: StyleObject,
+export function stringifyStyleMap(
+  styleMap: StyleMap,
   isImportant: boolean = false
 ) {
-  return Object.entries(styleObject)
+  return Object.entries(styleMap)
     .map(
       ([key, value]) => `${key}{${stringifyCSSProperties(value, isImportant)}}`
     )
