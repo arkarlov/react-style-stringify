@@ -73,9 +73,9 @@ Converts a single `CSSProperties` object to a CSS string. Automatically adds uni
 
 When set `important` argument to `true`, appends `!important` to each CSS property in the resulting string. Default is `false`.
 
-#### `stringifyStyleMap(styles: Record<string, CSSProperties>, important?: boolean): string`
+#### `stringifyStyleMap(styles: StyleMap, important?: boolean): string`
 
-Converts a `Record<string, CSSProperties>` object to a CSS string, suitable for use in `<style>` tags or inline CSS.
+Converts a `StyleMap` object to a string.
 
 When set `important` argument to `true`, appends `!important` to each CSS property in the resulting string. Default is `false`.
 
