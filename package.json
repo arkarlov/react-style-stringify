@@ -13,6 +13,11 @@
   ],
   "license": "MIT",
   "author": "Artem Karlov",
+  "homepage": "https://github.com/ArtemKarlov/react-style-stringify#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ArtemKarlov/react-style-stringify.git"
+  },
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
