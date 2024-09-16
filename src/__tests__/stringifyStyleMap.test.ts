@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { stringifyStyleMap } from "./stringifyStyleMap";
+import { stringifyStyleMap } from "../stringifyStyleMap";
 
 describe("stringifyStyleMap", () => {
   const cssProperties = { color: "teal" };

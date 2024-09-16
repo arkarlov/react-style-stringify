@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { stringifyCSSProperties } from "./stringifyCSSProperties";
+import { stringifyCSSProperties } from "../stringifyCSSProperties";
 
 describe("stringifyCSSProperties", () => {
   it("returns string", () => {
