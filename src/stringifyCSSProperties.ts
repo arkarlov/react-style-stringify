@@ -13,6 +13,10 @@ export function stringifyCSSProperties(
   cssProperties: CSSProperties,
   isImportant: boolean = false
 ) {
+  if (typeof cssProperties !== "object" || cssProperties === null) {
+    throw new Error("Invalid input: 'cssProperties' must be an object.");
+  }
+
   const important = isImportant ? "!important" : "";
 
   return Object.entries(cssProperties)

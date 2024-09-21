@@ -13,8 +13,6 @@ This utility was originally created to simplify the process of adding inline CSS
 
 ## Installation
 
-To install the package, use:
-
 ```bash
 npm install react-style-stringify
 ```
@@ -24,6 +22,18 @@ or
 ```bash
 yarn add react-style-stringify
 ```
+
+> **Note for TypeScript users**: This package uses the `CSSProperties` type from `@types/react`. If you're working with TypeScript and don't use React, install the type definitions:
+>
+> ```bash
+> npm install --save-dev @types/react
+> ```
+>
+> or
+>
+> ```bash
+> yarn add -D @types/react
+> ```
 
 ## Usage
 
@@ -84,6 +94,10 @@ When set `important` argument to `true`, appends `!important` to each CSS proper
 This package uses the following dependencies:
 
 - **[@emotion/unitless](https://www.npmjs.com/package/@emotion/unitless)**: Handles checking for CSS properties that are unitless (e.g., `line-height`, `z-index`, etc.).
+
+## Requirements
+
+- **[@types/react](https://www.npmjs.com/package/@types/react)**: The package uses React's CSSProperties type for defining style objects.
 
 ## Contributing
 
