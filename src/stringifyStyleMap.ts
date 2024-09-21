@@ -13,6 +13,10 @@ export function stringifyStyleMap(
   styleMap: StyleMap,
   isImportant: boolean = false
 ) {
+  if (typeof styleMap !== "object" || styleMap === null) {
+    throw new Error("Invalid input: 'styleMap' must be an object.");
+  }
+
   return Object.entries(styleMap)
     .map(
       ([key, value]) => `${key}{${stringifyCSSProperties(value, isImportant)}}`
