@@ -9,11 +9,25 @@ describe("stringifyStyleMap", () => {
     expect(stringifyStyleMap({ ".class": cssProperties })).toBeTypeOf("string");
   });
 
-  it("returns empty string for empty object", () => {
+  it("returns empty string for empty object input", () => {
     expect(stringifyStyleMap({})).toBe("");
   });
 
-  it("doesn't change selector string", () => {
+  it("throws error for string input", () => {
+    //@ts-ignore
+    expect(() => stringifyStyleMap("")).toThrowError(
+      "Invalid input: 'styleMap' must be an object."
+    );
+  });
+
+  it("throws error for 'null' input", () => {
+    //@ts-ignore
+    expect(() => stringifyStyleMap(null)).toThrowError(
+      "Invalid input: 'styleMap' must be an object."
+    );
+  });
+
+  it("doesn't change CSS-selector string", () => {
     const expected =
       "header{color:teal;} .className{color:teal;} body ul > li{color:teal;}";
     const actual = stringifyStyleMap({

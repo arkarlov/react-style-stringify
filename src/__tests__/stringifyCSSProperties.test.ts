@@ -7,11 +7,34 @@ describe("stringifyCSSProperties", () => {
     expect(stringifyCSSProperties({ color: "teal" })).toBeTypeOf("string");
   });
 
-  it("returns empty string for empty object", () => {
+  it("returns empty string for empty object input", () => {
     expect(stringifyCSSProperties({})).toBe("");
   });
 
-  it("doesn't change string values", () => {
+  it("throws error for string input", () => {
+    //@ts-ignore
+    expect(() => stringifyCSSProperties("")).toThrowError(
+      "Invalid input: 'cssProperties' must be an object."
+    );
+  });
+
+  it("throws error for 'null' input", () => {
+    //@ts-ignore
+    expect(() => stringifyCSSProperties(null)).toThrowError(
+      "Invalid input: 'cssProperties' must be an object."
+    );
+  });
+
+  it("throws error for wrong CSS-value", () => {
+    expect(() =>
+      //@ts-ignore
+      stringifyCSSProperties({ color: { color: "teal" } })
+    ).toThrowError(
+      "Invalid input: value of 'cssProperties' must be string or number."
+    );
+  });
+
+  it("doesn't change string CSS-value", () => {
     const expected = "color:teal; margin:20rem; padding:5px 10px;";
     const actual = stringifyCSSProperties({
       color: "teal",
@@ -22,7 +45,7 @@ describe("stringifyCSSProperties", () => {
     expect(actual).toBe(expected);
   });
 
-  it("converts props names from camel to kebab case", () => {
+  it("converts CSS-prop name from camel to kebab case", () => {
     const expected =
       "margin-bottom:20px; background-color:teal; border-radius:30rem; font-family:sans-serif;";
     const actual = stringifyCSSProperties({
@@ -35,14 +58,14 @@ describe("stringifyCSSProperties", () => {
     expect(actual).toBe(expected);
   });
 
-  it("adds 'px' to number values", () => {
+  it("adds 'px' to numeric CSS-value", () => {
     const expected = "margin:20px; padding:5px;";
     const actual = stringifyCSSProperties({ margin: 20, padding: 5 });
 
     expect(actual).toBe(expected);
   });
 
-  it("doesn't add 'px' to unitless props and '0' value", () => {
+  it("doesn't add 'px' to unitless CSS-prop and '0' CSS-value", () => {
     const expected = "z-index:20; flex:1; opacity:0.5; margin:0; padding:0;";
     const actual = stringifyCSSProperties({
       zIndex: 20,

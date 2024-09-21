@@ -7,7 +7,7 @@ export function applyCssUnits(
 ) {
   if (typeof value !== "string" && typeof value !== "number") {
     throw new Error(
-      "Invalid input: value of 'cssProperties' must be an string or number."
+      "Invalid input: value of 'cssProperties' must be string or number."
     );
   }
 
