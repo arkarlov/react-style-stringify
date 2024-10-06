@@ -31,7 +31,7 @@ yarn add react-style-stringify
 > [!NOTE]
 > This package uses the `CSSProperties` type from `@types/react`.
 > 
-> If you're working with TypeScript and don't use React, install `@types/react`.
+> If you're working with TypeScript and don't use React, install [@types/react](https://www.npmjs.com/package/@types/react).
 
 ## Usage
 
