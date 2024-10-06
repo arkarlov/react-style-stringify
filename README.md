@@ -35,34 +35,71 @@ yarn add react-style-stringify
 
 ## Usage
 
-Here’s a basic example of how to use the package:
+### Import utils
 
 ```tsx
 import {
   stringifyCSSProperties,
   stringifyStyleMap,
 } from "react-style-stringify";
+```
 
-// Convert a single CSSProperties object
+### Convert a single `CSSProperties` object
+
+```tsx
 const cssString = stringifyCSSProperties({
   flex: 1,
   padding: 20,
   backgroundColor: "teal",
 });
 // Output: "flex:1; padding:20px; background-color:teal;"
+```
 
-// Convert a Record<string, CSSProperties> object
-const cssMapString = stringifyStyleMap({
-  div: {
-    color: "blue",
-    marginBottom: 20,
+**Inject `!important` into CSS string**
+
+```tsx
+const importantCssString = stringifyCSSProperties(
+  {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "teal",
   },
-  ".my-class": {
+  true
+);
+// Output: "flex:1!important; padding:20px!important; background-color:teal!important;"
+```
+
+### Convert a `Record<string, CSSProperties>` object
+
+```tsx
+const cssMapString = stringifyStyleMap({
+  p: {
+    margin: 0,
+    color: "teal",
+  },
+  "#root ul.my-list > li": {
     padding: 10,
-    fontSize: 14,
   },
 });
-// Output: "div{color:blue; margin-bottom:20px;} .my-class{padding:10px; font-size:14px;}"
+// Output: "p{margin:0; color:teal;} #root ul.my-list > li{padding:10px;}"
+```
+
+**Inject `!important` into CSS string**
+
+```tsx
+const importantCssMapString = stringifyStyleMap(
+  {
+    p: {
+      margin: 0,
+      color: "teal",
+    },
+    "#root ul.my-list > li": {
+      padding: 10,
+    },
+  },
+  true
+);
+// Output: "p{margin:0!important; color:teal!important;} #root ul.my-list > li{padding:10px!important;}"
 ```
 
 ## API
