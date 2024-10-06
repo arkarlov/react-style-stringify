@@ -6,6 +6,8 @@
 [![NPM Type Definitions](https://img.shields.io/npm/types/react-style-stringify?color=3178C6)](https://www.npmjs.com/package/react-style-stringify)
 [![NPM Downloads](https://img.shields.io/npm/dm/react-style-stringify)](https://www.npmjs.com/package/react-style-stringify)
 
+[![GitHub Actions - Tests](https://github.com/arkarlov/react-style-stringify/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/arkarlov/react-style-stringify/actions/workflows/tests.yml)
+
 A utility for converting React `CSSProperties` objects or `Record<string, CSSProperties>` into CSS strings.
 
 This utility was originally created to simplify the process of adding inline CSS styles to HTML email templates in a React project. Previously, all styles were written as plain strings, which became unmanageable as the project grew. To make styles more maintainable and consistent, this utility was developed to convert React `CSSProperties` objects into CSS strings, streamlining the process of embedding styles in the final HTML before sending emails.
