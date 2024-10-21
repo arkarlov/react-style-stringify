@@ -5,11 +5,9 @@
   "keywords": [
     "css",
     "css-strings",
-    "css-properties",
-    "stringify",
-    "styles",
-    "react-styles",
-    "style-map"
+    "css-in-js",
+    "react-style",
+    "style-objects"
   ],
   "license": "MIT",
   "author": "Artem Karlov",
