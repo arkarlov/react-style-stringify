@@ -6,6 +6,8 @@
 [![NPM Type Definitions](https://img.shields.io/npm/types/react-style-stringify?color=3178C6)](https://www.npmjs.com/package/react-style-stringify)
 [![NPM Downloads](https://img.shields.io/npm/dm/react-style-stringify)](https://www.npmjs.com/package/react-style-stringify)
 
+[![GitHub Actions - Tests](https://github.com/arkarlov/react-style-stringify/actions/workflows/tests.yml/badge.svg?branch=main)](https://github.com/arkarlov/react-style-stringify/actions/workflows/tests.yml)
+
 A utility for converting React `CSSProperties` objects or `Record<string, CSSProperties>` into CSS strings.
 
 This utility was originally created to simplify the process of adding inline CSS styles to HTML email templates in a React project. Previously, all styles were written as plain strings, which became unmanageable as the project grew. To make styles more maintainable and consistent, this utility was developed to convert React `CSSProperties` objects into CSS strings, streamlining the process of embedding styles in the final HTML before sending emails.
@@ -31,38 +33,75 @@ yarn add react-style-stringify
 > [!NOTE]
 > This package uses the `CSSProperties` type from `@types/react`.
 > 
-> If you're working with TypeScript and don't use React, install `@types/react`.
+> If you're working with TypeScript and don't use React, install [@types/react](https://www.npmjs.com/package/@types/react).
 
 ## Usage
 
-Here’s a basic example of how to use the package:
+### Import utils
 
 ```tsx
 import {
   stringifyCSSProperties,
   stringifyStyleMap,
 } from "react-style-stringify";
+```
 
-// Convert a single CSSProperties object
+### Convert a single `CSSProperties` object
+
+```tsx
 const cssString = stringifyCSSProperties({
   flex: 1,
   padding: 20,
   backgroundColor: "teal",
 });
 // Output: "flex:1; padding:20px; background-color:teal;"
+```
 
-// Convert a Record<string, CSSProperties> object
-const cssMapString = stringifyStyleMap({
-  div: {
-    color: "blue",
-    marginBottom: 20,
+**Inject `!important` into CSS string**
+
+```tsx
+const importantCssString = stringifyCSSProperties(
+  {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "teal",
   },
-  ".my-class": {
+  true
+);
+// Output: "flex:1!important; padding:20px!important; background-color:teal!important;"
+```
+
+### Convert a `Record<string, CSSProperties>` object
+
+```tsx
+const cssMapString = stringifyStyleMap({
+  p: {
+    margin: 0,
+    color: "teal",
+  },
+  "#root ul.my-list > li": {
     padding: 10,
-    fontSize: 14,
   },
 });
-// Output: "div{color:blue; margin-bottom:20px;} .my-class{padding:10px; font-size:14px;}"
+// Output: "p{margin:0; color:teal;} #root ul.my-list > li{padding:10px;}"
+```
+
+**Inject `!important` into CSS string**
+
+```tsx
+const importantCssMapString = stringifyStyleMap(
+  {
+    p: {
+      margin: 0,
+      color: "teal",
+    },
+    "#root ul.my-list > li": {
+      padding: 10,
+    },
+  },
+  true
+);
+// Output: "p{margin:0!important; color:teal!important;} #root ul.my-list > li{padding:10px!important;}"
 ```
 
 ## API
