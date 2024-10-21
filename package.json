@@ -4,7 +4,7 @@
   "description": "A utility for converting React CSSProperties and style maps into CSS strings, designed to simplify the management of inline styles in HTML email templates and React projects.",
   "keywords": [
     "css",
-    "css-strings",
+    "css-string",
     "css-in-js",
     "react-style",
     "style-objects"
