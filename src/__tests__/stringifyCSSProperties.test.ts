@@ -35,7 +35,7 @@ describe("stringifyCSSProperties", () => {
   });
 
   it("doesn't change string CSS-value", () => {
-    const expected = "color:teal; margin:20rem; padding:5px 10px;";
+    const expected = "color:teal;margin:20rem;padding:5px 10px;";
     const actual = stringifyCSSProperties({
       color: "teal",
       margin: "20rem",
@@ -47,7 +47,7 @@ describe("stringifyCSSProperties", () => {
 
   it("converts CSS-prop name from camel to kebab case", () => {
     const expected =
-      "margin-bottom:20px; background-color:teal; border-radius:30rem; font-family:sans-serif;";
+      "margin-bottom:20px;background-color:teal;border-radius:30rem;font-family:sans-serif;";
     const actual = stringifyCSSProperties({
       marginBottom: "20px",
       backgroundColor: "teal",
@@ -59,14 +59,14 @@ describe("stringifyCSSProperties", () => {
   });
 
   it("adds 'px' to numeric CSS-value", () => {
-    const expected = "margin:20px; padding:5px;";
+    const expected = "margin:20px;padding:5px;";
     const actual = stringifyCSSProperties({ margin: 20, padding: 5 });
 
     expect(actual).toBe(expected);
   });
 
   it("doesn't add 'px' to unitless CSS-prop and '0' CSS-value", () => {
-    const expected = "z-index:20; flex:1; opacity:0.5; margin:0; padding:0;";
+    const expected = "z-index:20;flex:1;opacity:0.5;margin:0;padding:0;";
     const actual = stringifyCSSProperties({
       zIndex: 20,
       flex: 1,
