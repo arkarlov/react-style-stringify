@@ -24,5 +24,5 @@ export function stringifyCSSProperties(
       ([key, value]) =>
         `${camelToKebab(key)}:${applyCssUnits(key, value)}${important};`
     )
-    .join(" ");
+    .join("");
 }

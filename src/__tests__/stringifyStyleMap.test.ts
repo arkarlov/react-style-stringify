@@ -27,26 +27,53 @@ describe("stringifyStyleMap", () => {
     );
   });
 
-  it("doesn't change CSS-selector string", () => {
+  it("makes CSS-rules with CSS-selector string and CSS-properties string", () => {
     const expected =
-      "header{color:teal;} .className{color:teal;} body ul > li{color:teal;}";
+      "header{color:teal;}.className{color:teal;}#root{color:teal;}";
     const actual = stringifyStyleMap({
       header: cssProperties,
       ".className": cssProperties,
-      "body ul > li": cssProperties,
+      "#root": cssProperties,
     });
 
     expect(actual).toBe(expected);
   });
 
-  // TODO: add reducing feature to stringifyStyleMap
-  it("doesn't reduce styles for empty cssProperties", () => {
-    const expected = "header{color:teal;} main{} footer{color:teal;}";
+  it("trims CSS-selector string properly", () => {
+    const expected =
+      ".className{color:teal;}#root div h1{color:teal;}#root>ul li{color:teal;}*>p+ul li{color:teal;}div~p.className{color:teal;}";
+    const actual = stringifyStyleMap({
+      " .className  ": cssProperties,
+      "#root   div h1": cssProperties,
+      "#root >  ul li": cssProperties,
+      "* > p+  ul li": cssProperties,
+      "div ~p.className": cssProperties,
+    });
+
+    expect(actual).toBe(expected);
+  });
+
+  it("reduces styles for empty cssProperties", () => {
+    const expected = "header{color:teal;}footer{color:teal;}";
     const actual = stringifyStyleMap({
       header: cssProperties,
       main: {},
       footer: cssProperties,
     });
+
+    expect(actual).toBe(expected);
+  });
+
+  it("injects the '!important' statement for each style property", () => {
+    const expected =
+      "#root{color:teal!important;}.footer{color:teal!important;}";
+    const actual = stringifyStyleMap(
+      {
+        "#root": cssProperties,
+        ".footer": cssProperties,
+      },
+      true
+    );
 
     expect(actual).toBe(expected);
   });

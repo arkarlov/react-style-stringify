@@ -1,5 +1,6 @@
 import { type StyleMap } from "./types";
 import { stringifyCSSProperties } from "./stringifyCSSProperties";
+import { trimCssSelector } from "./utils";
 
 /**
  * Converts a `StyleMap` (a map of CSS selectors to `CSSProperties`) into a string of CSS rules.
@@ -18,8 +19,16 @@ export function stringifyStyleMap(
   }
 
   return Object.entries(styleMap)
-    .map(
-      ([key, value]) => `${key}{${stringifyCSSProperties(value, isImportant)}}`
-    )
-    .join(" ");
+    .reduce<string[]>((result, [key, value]) => {
+      if (Object.keys(value).length > 0) {
+        result.push(
+          `${trimCssSelector(key)}{${stringifyCSSProperties(
+            value,
+            isImportant
+          )}}`
+        );
+      }
+      return result;
+    }, [])
+    .join("");
 }
