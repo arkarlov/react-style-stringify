@@ -63,4 +63,18 @@ describe("stringifyStyleMap", () => {
 
     expect(actual).toBe(expected);
   });
+
+  it("injects the '!important' statement for each style property", () => {
+    const expected =
+      "#root{color:teal!important;}.footer{color:teal!important;}";
+    const actual = stringifyStyleMap(
+      {
+        "#root": cssProperties,
+        ".footer": cssProperties,
+      },
+      true
+    );
+
+    expect(actual).toBe(expected);
+  });
 });

@@ -77,4 +77,19 @@ describe("stringifyCSSProperties", () => {
 
     expect(actual).toBe(expected);
   });
+
+  it("injects the '!important' statement for each style property", () => {
+    const expected =
+      "color:teal!important;margin:20rem!important;padding:5px 10px!important;";
+    const actual = stringifyCSSProperties(
+      {
+        color: "teal",
+        margin: "20rem",
+        padding: "5px 10px",
+      },
+      true
+    );
+
+    expect(actual).toBe(expected);
+  });
 });
