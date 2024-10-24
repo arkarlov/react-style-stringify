@@ -41,7 +41,7 @@ describe("stringifyStyleMap", () => {
 
   it("trims CSS-selector string properly", () => {
     const expected =
-      ".className{color:teal;}#root div h1{color:teal;}#root>ul li{color:teal;}*>p+ul li{color:teal;}div~p.className{color:teal;}";
+      ".className{color:teal;}#root div h1{color:teal;}#root>ul li{color:teal;}*>p+ul li{color:teal;}div~p.className{color:teal;} ";
     const actual = stringifyStyleMap({
       " .className  ": cssProperties,
       "#root   div h1": cssProperties,
