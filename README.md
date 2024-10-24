@@ -30,9 +30,10 @@ or
 ```bash
 yarn add react-style-stringify
 ```
+
 > [!NOTE]
 > This package uses the `CSSProperties` type from `@types/react`.
-> 
+>
 > If you're working with TypeScript and don't use React, install [@types/react](https://www.npmjs.com/package/@types/react).
 
 ## Usage
@@ -54,7 +55,7 @@ const cssString = stringifyCSSProperties({
   padding: 20,
   backgroundColor: "teal",
 });
-// Output: "flex:1; padding:20px; background-color:teal;"
+// Output: "flex:1;padding:20px;background-color:teal;"
 ```
 
 **Inject `!important` into CSS string**
@@ -68,7 +69,7 @@ const importantCssString = stringifyCSSProperties(
   },
   true
 );
-// Output: "flex:1!important; padding:20px!important; background-color:teal!important;"
+// Output: "flex:1!important;padding:20px!important;background-color:teal!important;"
 ```
 
 ### Convert a `Record<string, CSSProperties>` object
@@ -83,7 +84,7 @@ const cssMapString = stringifyStyleMap({
     padding: 10,
   },
 });
-// Output: "p{margin:0; color:teal;} #root ul.my-list > li{padding:10px;}"
+// Output: "p{margin:0;color:teal;}#root ul.my-list>li{padding:10px;}"
 ```
 
 **Inject `!important` into CSS string**
@@ -101,7 +102,7 @@ const importantCssMapString = stringifyStyleMap(
   },
   true
 );
-// Output: "p{margin:0!important; color:teal!important;} #root ul.my-list > li{padding:10px!important;}"
+// Output: "p{margin:0!important;color:teal!important;}#root ul.my-list>li{padding:10px!important;}"
 ```
 
 ## API
