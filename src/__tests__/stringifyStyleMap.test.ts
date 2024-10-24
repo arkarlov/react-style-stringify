@@ -39,19 +39,19 @@ describe("stringifyStyleMap", () => {
     expect(actual).toBe(expected);
   });
 
-  // it("trims CSS-selector string properly", () => {
-  //   const expected =
-  //     "header{color:teal;}.className{color:teal;}#root{color:teal;}";
-  //   const actual = stringifyStyleMap({
-  //     header: cssProperties,
-  //     ".className": cssProperties,
-  //     "#root": cssProperties,
-  //     "article *:first-child": cssProperties,
-  //     "h1.title": cssProperties,
-  //   });
+  it("trims CSS-selector string properly", () => {
+    const expected =
+      ".className{color:teal;}#root div h1{color:teal;}#root>ul li{color:teal;}*>p+ul li{color:teal;}div~p.className{color:teal;}";
+    const actual = stringifyStyleMap({
+      " .className  ": cssProperties,
+      "#root   div h1": cssProperties,
+      "#root >  ul li": cssProperties,
+      "* > p+  ul li": cssProperties,
+      "div ~p.className": cssProperties,
+    });
 
-  //   expect(actual).toBe(expected);
-  // });
+    expect(actual).toBe(expected);
+  });
 
   it("reduces styles for empty cssProperties", () => {
     const expected = "header{color:teal;}footer{color:teal;}";
