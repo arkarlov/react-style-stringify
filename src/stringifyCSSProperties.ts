@@ -1,5 +1,5 @@
 import { type CSSProperties } from "react";
-import { applyCssUnits, camelToKebab } from "./utils";
+import { applyCssUnits, camelToKebab, isCSSPropertyValue } from "./utils";
 
 /**
  * Converts a CSSProperties object into a CSS string.
@@ -20,6 +20,7 @@ export function stringifyCSSProperties(
   const important = isImportant ? "!important" : "";
 
   return Object.entries(cssProperties)
+    .filter(([_, value]) => isCSSPropertyValue(value))
     .map(
       ([key, value]) =>
         `${camelToKebab(key)}:${applyCssUnits(key, value)}${important};`
