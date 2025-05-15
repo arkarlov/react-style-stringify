@@ -25,13 +25,19 @@ describe("stringifyCSSProperties", () => {
     );
   });
 
-  it("throws error for wrong CSS-value", () => {
-    expect(() =>
+  it("skips CSS properties with wrong CSS value", () => {
+    const expected = "padding:5px 10px;color:teal;";
+    const actual = stringifyCSSProperties({
       //@ts-ignore
-      stringifyCSSProperties({ color: { color: "teal" } })
-    ).toThrowError(
-      "Invalid input: value of 'cssProperties' must be string or number."
-    );
+      margin: { top: 10 },
+      padding: "5px 10px",
+      background: undefined,
+      color: "teal",
+      //@ts-ignore
+      border: null,
+    });
+
+    expect(actual).toBe(expected);
   });
 
   it("doesn't change string CSS-value", () => {

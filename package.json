@@ -31,7 +31,8 @@
   },
   "scripts": {
     "build": "tsup",
-    "test": "vitest --config vitest.config.ts"
+    "test": "vitest run --config vitest.config.ts",
+    "test:watch": "vitest --config vitest.config.ts"
   },
   "dependencies": {
     "@emotion/unitless": "^0.10.0"
