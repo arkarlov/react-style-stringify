@@ -1,6 +1,6 @@
 {
   "name": "react-style-stringify",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A utility for converting React CSSProperties and style maps into CSS strings, designed to simplify the management of inline styles in HTML email templates and React projects.",
   "keywords": [
     "css",
