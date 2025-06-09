@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { stringifyCSSProperties } from "../stringifyCSSProperties";
+import { stringifyCSSProperties } from "../stringify-react-styles";
 
 describe("stringifyCSSProperties", () => {
   it("returns string", () => {
@@ -14,14 +14,14 @@ describe("stringifyCSSProperties", () => {
   it("throws error for string input", () => {
     //@ts-ignore
     expect(() => stringifyCSSProperties("")).toThrowError(
-      "Invalid input: 'cssProperties' must be an object."
+      "[stringifyCSSProperties]: Expected 'cssProperties' to be a non-null object, but received  (type:string)."
     );
   });
 
   it("throws error for 'null' input", () => {
     //@ts-ignore
     expect(() => stringifyCSSProperties(null)).toThrowError(
-      "Invalid input: 'cssProperties' must be an object."
+      "[stringifyCSSProperties]: Expected 'cssProperties' to be a non-null object, but received null (type:object)."
     );
   });
 
@@ -97,5 +97,49 @@ describe("stringifyCSSProperties", () => {
     );
 
     expect(actual).toBe(expected);
+  });
+});
+
+describe("stringifyStyleMap accepts 'options' object", () => {
+  it("applies !important when the flag is set", () => {
+    expect(
+      stringifyCSSProperties(
+        {
+          display: "flex",
+          top: 100,
+        },
+        {
+          important: true,
+        }
+      )
+    ).toBe("display:flex!important;top:100px!important;");
+  });
+
+  it("uses a global unit string when specified", () => {
+    expect(
+      stringifyCSSProperties(
+        {
+          top: 100,
+        },
+        {
+          unit: "rem",
+        }
+      )
+    ).toBe("top:100rem;");
+  });
+
+  it("uses per-property unit map when provided (with 'px' fallback)", () => {
+    expect(
+      stringifyCSSProperties(
+        {
+          paddingBlock: 20,
+          paddingInline: 30,
+          top: 100,
+        },
+        {
+          unit: { paddingBlock: "vh", paddingInline: "vw" },
+        }
+      )
+    ).toBe("padding-block:20vh;padding-inline:30vw;top:100px;");
   });
 });

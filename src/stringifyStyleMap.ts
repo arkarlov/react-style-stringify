@@ -1,6 +1,8 @@
-import { type StyleMap } from "./types";
+import { CSSProperties } from "react";
 import { stringifyCSSProperties } from "./stringifyCSSProperties";
 import { trimCssSelector } from "./utils";
+
+export type StyleMap = Record<string, CSSProperties>;
 
 /**
  * Converts a `StyleMap` (a map of CSS selectors to `CSSProperties`) into a string of CSS rules.
