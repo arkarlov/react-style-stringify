@@ -1,9 +1,12 @@
+import { CSSUnit, CSSUnitMap } from "../types";
 import { isUnitless } from "./isUnitless";
 
-export function applyCssUnits(
-  prop: string,
+const DEFAULT_UNIT = "px";
+
+export function applyCssUnits<T extends string = string>(
+  property: T,
   value: string | number,
-  units: string = "px"
+  unit: CSSUnit | CSSUnitMap<T> = DEFAULT_UNIT
 ) {
   if (typeof value !== "string" && typeof value !== "number") {
     throw new Error(
@@ -11,9 +14,12 @@ export function applyCssUnits(
     );
   }
 
-  if (typeof value === "number" && value !== 0 && !isUnitless(prop)) {
-    return `${value}${units}`;
+  if (typeof value === "string" || value === 0 || isUnitless(property)) {
+    return `${value}`;
   }
 
-  return `${value}`;
+  const resolvedUnit =
+    (typeof unit === "string" ? unit : unit[property]) || DEFAULT_UNIT;
+
+  return `${value}${resolvedUnit}`;
 }
