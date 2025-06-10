@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
 import { applyCssUnits } from "../utils";
+import { type CSSUnitMap } from "../types";
 
 describe("applyCssUnits", () => {
   it("returns string values as-is", () => {
@@ -20,7 +21,7 @@ describe("applyCssUnits", () => {
   });
 
   it("uses unit map when provided", () => {
-    const unitMap = {
+    const unitMap: CSSUnitMap = {
       fontSize: "rem",
       marginTop: "%",
     };
