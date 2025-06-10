@@ -1,5 +1,5 @@
 export * from "./stringify-react-styles";
-export * from "./utils/stringifyStyleDeclaration";
-export * from "./utils/stringifyStyleRule";
+export * from "./stringifyStyleDeclaration";
+export * from "./stringifyStyleRule";
 
 export * from "./types";

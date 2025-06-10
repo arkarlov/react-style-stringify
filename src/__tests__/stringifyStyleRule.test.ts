@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { stringifyStyleRule } from "../utils/stringifyStyleRule";
+import { stringifyStyleRule } from "../stringifyStyleRule";
 
 type MockStyleType = {
   display?: string | number;

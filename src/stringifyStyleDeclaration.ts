@@ -1,7 +1,7 @@
-import { StringifyOptions } from "../types";
-import { applyCssUnits } from "./applyCssUnits";
-import { camelToKebab } from "./camelToKebab";
-import { isCSSPropertyValue } from "./isCSSPropertyValue";
+import { StringifyOptions } from "./types";
+import { applyCssUnits } from "./utils/applyCssUnits";
+import { camelToKebab } from "./utils/camelToKebab";
+import { isCSSPropertyValue } from "./utils/isCSSPropertyValue";
 
 export type StyleDeclaration = Record<string, string | number>;
 

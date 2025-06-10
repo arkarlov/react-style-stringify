@@ -1,7 +1,7 @@
 import { type CSSProperties } from "react";
 import { type StringifyOptions } from "./types";
-import { stringifyStyleDeclaration } from "./utils/stringifyStyleDeclaration";
-import { stringifyStyleRule } from "./utils/stringifyStyleRule";
+import { stringifyStyleDeclaration } from "./stringifyStyleDeclaration";
+import { stringifyStyleRule } from "./stringifyStyleRule";
 
 /**
  * Converts a CSSProperties object into a CSS string.

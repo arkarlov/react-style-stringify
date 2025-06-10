@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 
-import { stringifyStyleDeclaration } from "../utils/stringifyStyleDeclaration";
+import { stringifyStyleDeclaration } from "../stringifyStyleDeclaration";
 
 describe("stringifyStyleDeclaration", () => {
   it("converts a basic style declaration to a CSS string", () => {
