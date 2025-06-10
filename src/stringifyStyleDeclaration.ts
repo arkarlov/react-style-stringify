@@ -21,6 +21,8 @@ export type StyleDeclaration = Record<string, string | number>;
  *   - Units are added to numeric values as specified, or `'px'` by default.
  *   - Each declaration ends with a semicolon.
  *   - `!important` is appended if the `important` flag is set.
+ *
+ * @throws {TypeError} Throws if the `styleDeclaration` argument is not a non-null object.
  */
 export function stringifyStyleDeclaration<T extends object = StyleDeclaration>(
   styleDeclaration: T,

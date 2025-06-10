@@ -18,7 +18,7 @@ import { stringifyStyleRule } from "./stringifyStyleRule";
  * @returns {string} A formatted CSS string where each property is converted to kebab-case, units are added where necessary,
  *                   and `!important` is appended if specified.
  *
- * @throws {Error} Throws if `cssProperties` is not a non-null object.
+ * @throws {TypeError} Throws if `cssProperties` is not a non-null object.
  */
 export function stringifyCSSProperties(
   cssProperties: CSSProperties,
@@ -51,7 +51,7 @@ export type StyleMap = Record<string, CSSProperties>;
  * @returns {string} A formatted CSS string where each selector is followed by its corresponding declarations.
  *                   Properties are converted to kebab-case and numeric values are suffixed with appropriate units unless the property is unitless.
  *
- * @throws {Error} Throws if `cssProperties` is not a non-null object.
+ * @throws {TypeError} Throws if `cssProperties` is not a non-null object.
  */
 export function stringifyStyleMap(
   styleMap: StyleMap,

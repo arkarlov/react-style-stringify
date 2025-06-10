@@ -17,10 +17,11 @@ export type StyleRule<T extends object = StyleDeclaration> = Record<string, T>;
  * @param {StringifyOptions<T>} [options] - Optional settings controlling how declarations are stringified,
  *                                         such as appending `!important` or units.
  *
- * @throws {Error} Throws if the `styleRule` argument is not a non-null object.
  *
  * @returns {string} A CSS string where each selector and its corresponding declarations are formatted properly.
  *                   Empty declarations are skipped.
+ *
+ * @throws {TypeError} Throws if the `styleRule` argument is not a non-null object.
  */
 export function stringifyStyleRule<T extends object = StyleDeclaration>(
   styleRule: StyleRule<T>,
