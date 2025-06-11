@@ -16,8 +16,8 @@ This utility was originally created to simplify the process of adding inline CSS
 
 - Converts a single `CSSProperties` object to a CSS string.
 - Converts a `Record<string, CSSProperties>` map to a CSS string.
-- Automatically adds units (e.g., `px`) where necessary.
-- Optionally injects the `!important` statement for each style property.
+- Automatically adds units (`px` by default) for numeric values.
+- Optionally injects the `!important` statement for each css declaration.
 
 ## Installation
 
@@ -31,7 +31,7 @@ or
 yarn add react-style-stringify
 ```
 
-> [!NOTE]
+> [!TIP]
 > This package uses the `CSSProperties` type from `@types/react`.
 >
 > If you're working with TypeScript and don't use React, install [@types/react](https://www.npmjs.com/package/@types/react).
@@ -56,21 +56,43 @@ const cssString = stringifyCSSProperties({
   backgroundColor: "teal",
 });
 // Output: "flex:1;padding:20px;background-color:teal;"
-```
 
-**Inject `!important` into CSS string**
-
-```tsx
 const importantCssString = stringifyCSSProperties(
   {
     flex: 1,
     padding: 20,
     backgroundColor: "teal",
   },
-  true
+  { important: true } // `true` in versions <= 1.1.1
 );
 // Output: "flex:1!important;padding:20px!important;background-color:teal!important;"
+
+const cssStringWtihDefinedUnit = stringifyCSSProperties(
+  {
+    padding: 10,
+    fontSize: 1.6,
+  },
+  {
+    unit: "em",
+  }
+);
+// Output: "padding:10em;font-size:1.6em;"
+
+const cssStringWtihDefinedUnitMap = stringifyCSSProperties(
+  {
+    padding: 10,
+    fontSize: 1.6,
+  },
+  {
+    unit: { fontSize: "rem" },
+  }
+);
+// Output: "padding:10px;font-size:1.6rem;"
 ```
+
+> [!WARNING]
+> In versions `<= 1.1.1`, only `true` was accepted as the second argument.
+> As of `v1.2.0`, the options object `{ important: true }` is recommended.
 
 ### Convert a `Record<string, CSSProperties>` object
 
@@ -87,45 +109,90 @@ const cssMapString = stringifyStyleMap({
 // Output: "p{margin:0;color:teal;}#root ul.my-list>li{padding:10px;}"
 ```
 
-**Inject `!important` into CSS string**
+> [!NOTE]
+> The `options` argument is forwarded internally to `stringifyCSSProperties`, so all options (like `important` or `unit`) work the same way.
 
-```tsx
-const importantCssMapString = stringifyStyleMap(
-  {
-    p: {
-      margin: 0,
-      color: "teal",
-    },
-    "#root ul.my-list > li": {
+### Generic
+
+```ts
+import {
+  stringifyStyleDeclaration,
+  stringifyStyleRule,
+} from "react-style-stringify";
+
+type MyStyle = {
+  padding: number;
+  fontSize: number;
+};
+
+stringifyStyleDeclaration<MyStyle>({
+  padding: 10,
+  fontSize: 16,
+})
+// Output: "padding:10px;font-size:16px;"
+
+stringifyStyleRule<MyStyle>({
+  ".container": {
       padding: 10,
-    },
+      fontSize: 16,
   },
-  true
-);
-// Output: "p{margin:0!important;color:teal!important;}#root ul.my-list>li{padding:10px!important;}"
+});
+// Output: ".container{"padding:10px;font-size:16px;"}"
 ```
+
+> [!NOTE]
+> The `options` argument works the same way as for `stringifyCSSProperties` and `stringifyStyleMap`.
 
 ## API
 
-### Exported Types
+### Types
 
-#### `StyleMap: Record<string, CSSProperties>`
+```ts
+type StyleMap = Record<string, CSSProperties>;
 
-Defines a map where keys are CSS selectors (`string`) and values are `CSSProperties` objects, which represent inline CSS styles in React.
+type CSSUnit = "px" | "em" | "rem" | "vw" | "vh" | "%";
 
-### Exported Functions
+type CSSUnitMap<K extends PropertyKey = string> = {
+    [P in K]?: CSSUnit;
+};
 
-#### `stringifyCSSProperties(style: CSSProperties, important?: boolean): string`
+type StringifyOptions<T extends object = Record<string, string | number>> = {
+    important?: boolean;
+    unit?: CSSUnit | CSSUnitMap<keyof T>;
+};
 
-Converts a single `CSSProperties` object to a CSS string. Automatically adds units (e.g., `px`) where required.
+type StyleDeclaration = Record<string, string | number>;
 
-When set `important` argument to `true`, appends `!important` to each CSS property in the resulting string. Default is `false`.
+type StyleRule<T extends object = StyleDeclaration> = Record<string, T>;
+```
 
-#### `stringifyStyleMap(styles: StyleMap, important?: boolean): string`
+### Functions
 
-Converts a `StyleMap` object to a string.
+```ts
+function stringifyCSSProperties(
+  cssProperties: CSSProperties,
+  optionsOrImportant?: StringifyOptions<CSSProperties> | boolean
+): string;
 
-When set `important` argument to `true`, appends `!important` to each CSS property in the resulting string. Default is `false`.
+function stringifyStyleMap(
+  styleMap: StyleMap,
+  optionsOrImportant?: StringifyOptions<CSSProperties> | boolean
+): string;
+```
+
+### Generic
+
+```ts
+function stringifyStyleDeclaration<T extends object = StyleDeclaration>(
+  styleDeclaration: T,
+  options?: StringifyOptions<T>
+): string;
+
+function stringifyStyleRule<T extends object = StyleDeclaration>(
+  styleRule: StyleRule<T>,
+  options?: StringifyOptions<T>
+): string;
+```
 
 ## Dependencies
 
