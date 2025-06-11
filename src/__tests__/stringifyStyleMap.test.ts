@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { stringifyStyleMap } from "../stringifyStyleMap";
+import { stringifyStyleMap } from "../stringify-react-styles";
 
 describe("stringifyStyleMap", () => {
   const cssProperties = { color: "teal" };
@@ -16,14 +16,14 @@ describe("stringifyStyleMap", () => {
   it("throws error for string input", () => {
     //@ts-ignore
     expect(() => stringifyStyleMap("")).toThrowError(
-      "Invalid input: 'styleMap' must be an object."
+      "[stringifyStyleMap]: Expected 'styleMap' to be a non-null object, but received  (type:string)."
     );
   });
 
   it("throws error for 'null' input", () => {
     //@ts-ignore
     expect(() => stringifyStyleMap(null)).toThrowError(
-      "Invalid input: 'styleMap' must be an object."
+      "[stringifyStyleMap]: Expected 'styleMap' to be a non-null object, but received null (type:object)."
     );
   });
 
@@ -76,5 +76,67 @@ describe("stringifyStyleMap", () => {
     );
 
     expect(actual).toBe(expected);
+  });
+});
+
+describe("stringifyStyleMap accepts 'options' object", () => {
+  it("applies !important when the flag is set", () => {
+    expect(
+      stringifyStyleMap(
+        {
+          ".class-1": {
+            display: "flex",
+          },
+          ".class-2": {
+            display: "flex",
+          },
+        },
+        {
+          important: true,
+        }
+      )
+    ).toBe(
+      ".class-1{display:flex!important;}.class-2{display:flex!important;}"
+    );
+  });
+
+  it("uses a global unit string when specified", () => {
+    expect(
+      stringifyStyleMap(
+        {
+          ".class-1": {
+            margin: 10,
+          },
+          ".class-2": {
+            padding: 20,
+          },
+        },
+        {
+          unit: "rem",
+        }
+      )
+    ).toBe(".class-1{margin:10rem;}.class-2{padding:20rem;}");
+  });
+
+  it("uses per-property unit map when provided (with 'px' fallback)", () => {
+    expect(
+      stringifyStyleMap(
+        {
+          ".class-1": {
+            marginBlock: 30,
+          },
+          ".class-2": {
+            top: 100,
+            paddingBlock: 20,
+            paddingInline: 10,
+          },
+        },
+        {
+          unit: { paddingBlock: "vh", paddingInline: "vw" },
+        }
+      )
+    ).toBe(
+      ".class-1{margin-block:30px;}.class-2{top:100px;padding-block:20vh;padding-inline:10vw;}"
+    );
   });
 });
