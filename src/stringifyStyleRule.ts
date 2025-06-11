@@ -2,7 +2,7 @@ import {
   stringifyStyleDeclaration,
   type StyleDeclaration,
 } from "./stringifyStyleDeclaration";
-import { trimCssSelector } from "./utils/trimCssSelector";
+import { trimCssSelector } from "./helpers";
 import { type StringifyOptions } from "./types";
 
 export type StyleRule<T extends object = StyleDeclaration> = Record<string, T>;

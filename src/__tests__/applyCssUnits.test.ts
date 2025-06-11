@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { applyCssUnits } from "../utils";
+import { applyCssUnits } from "../helpers";
 import { type CSSUnitMap } from "../types";
 
 describe("applyCssUnits", () => {

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { trimCssSelector } from "../utils/trimCssSelector";
+import { trimCssSelector } from "../helpers";
 
 describe("trimCssSelector", () => {
   it("removes spaces around combinators (+, ~, >)", () => {
