@@ -120,24 +120,25 @@ import {
   stringifyStyleRule,
 } from "react-style-stringify";
 
-type MyStyle = {
-  padding: number;
+type MyStyles = {
+  padding: string | number;
   fontSize: number;
+  "--my-custom-prop": string;
 };
 
-stringifyStyleDeclaration<MyStyle>({
-  padding: 10,
-  fontSize: 16,
+stringifyStyleDeclaration<Partial<MyStyles>>({
+  padding: 20,
+  "--my-custom-prop": "brown",
 })
-// Output: "padding:10px;font-size:16px;"
+// Output: "padding:20px;--my-custom-prop:brown;"
 
-stringifyStyleRule<MyStyle>({
+stringifyStyleRule<Partial<MyStyles>>({
   ".container": {
-      padding: 10,
-      fontSize: 16,
+    padding: 20,
+    "--my-custom-prop": "brown",
   },
-});
-// Output: ".container{"padding:10px;font-size:16px;"}"
+})
+// Output: ".container{padding:20px;--my-custom-prop:brown;}"
 ```
 
 > [!NOTE]
